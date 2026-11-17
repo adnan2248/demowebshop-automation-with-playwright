@@ -41,5 +41,9 @@ export class ProductPage {
     async addToCart() {
         await this.addToCartButton.click();
     }
+    // Set product quantity
+async setQuantity(quantity) {
+    await this.quantityInput.fill(String(quantity));
+}
 
 }

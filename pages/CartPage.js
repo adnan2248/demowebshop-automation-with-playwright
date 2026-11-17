@@ -14,9 +14,11 @@ export class CartPage {
         this.productName = page.locator('.product a.product-name');
 
         // Quantity input
-        this.quantityInput = page.locator(
-            'input.qty-input'
-        );
+        this.quantityInput = page.locator('input.qty-input' );
+
+        // Checkout elements
+        this.termsCheckbox = page.locator('#termsofservice');
+        this.checkoutButton = page.locator('#checkout');
     }
 
     // Navigate to shopping cart
@@ -32,6 +34,16 @@ export class CartPage {
     // Get product quantity from cart
     async getProductQuantity() {
         return await this.quantityInput.inputValue();
+    }
+
+    // Accept terms and conditions
+    async acceptTerms() {
+        await this.termsCheckbox.check();
+    }
+
+    // Proceed to checkout
+    async proceedToCheckout() {
+        await this.checkoutButton.click();
     }
 
 }
