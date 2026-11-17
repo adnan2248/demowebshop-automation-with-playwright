@@ -1,0 +1,14 @@
+{
+  "name": "module-10-assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "keywords": [],
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "^1.65.1"
+  }
+}
