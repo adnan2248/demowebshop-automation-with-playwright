@@ -1,22 +1,24 @@
 # Demo Web Shop Automation & API Testing
 
-An end-to-end UI and API automation project developed as part of the Software Quality Assurance assignment.
+An end-to-end UI and API automation project developed as part of a Software Quality Assurance (SQA) assignment.
 
-The project automates customer workflows on the Tricentis Demo Web Shop using Playwright with the Page Object Model (POM) design pattern. It also performs API testing using Postman and Newman.
+The project automates customer workflows on the [Tricentis Demo Web Shop](https://demowebshop.tricentis.com/) using **Playwright with JavaScript and the Page Object Model (POM)** design pattern. It also performs REST API testing using **Postman and Newman**.
 
 ---
 
 ## Project Overview
 
-**Website:** https://demowebshop.tricentis.com/
+This project is divided into three major parts:
 
-**API:** https://jsonplaceholder.typicode.com/users
+| Part | Description | Tools |
+|---|---|---|
+| Part A | UI Test Automation | Playwright, JavaScript, POM |
+| Part B | Version Control & GitHub Workflow | Git, GitHub, Feature Branches, Pull Requests |
+| Part C | API Test Automation | Postman, Newman |
 
-This project contains three major parts:
+**Application Under Test:** https://demowebshop.tricentis.com/
 
-- **Part A – UI Automation:** Automating three end-to-end user scenarios using Playwright.
-- **Part B – GitHub Workflow:** Maintaining separate feature branches, meaningful commits, and merging completed work into the main branch.
-- **Part C – API Automation:** Testing GET and PUT requests using Postman and executing the collection through Newman.
+**API Under Test:** https://jsonplaceholder.typicode.com/users
 
 ---
 
@@ -25,96 +27,85 @@ This project contains three major parts:
 | Technology | Purpose |
 |---|---|
 | JavaScript | Programming language |
-| Node.js | Runtime environment |
-| Playwright | UI automation framework |
-| Page Object Model (POM) | Test architecture |
-| Postman | API test automation |
-| Newman | Command-line API execution |
-| Newman HTML Extra | API HTML reporting |
-| Allure | Test reporting |
+| Node.js & npm | Runtime environment and package management |
+| Playwright | UI test automation |
+| Page Object Model (POM) | Test architecture and maintainability |
+| Postman | API request creation and validation |
+| Newman | Command-line API test execution |
+| Newman HTML Extra | API test reporting |
+| Allure | UI test reporting |
 | Playwright HTML Reporter | UI test reporting |
 | Git & GitHub | Version control and collaboration |
 
 ---
 
-# Part A – UI Automation
+# Part A – UI Test Automation
 
-UI automation is implemented using Playwright with the Page Object Model (POM) design pattern.
+UI automation is implemented using Playwright with JavaScript and the Page Object Model (POM) design pattern.
 
 ### Test Scenarios
 
-**Q1 – Invalid Login**
+#### Q1 – Invalid Login
 
-- Navigate to the login page.
-- Enter invalid email and password credentials.
-- Attempt to log in.
-- Verify that the appropriate error message is displayed.
-- Verify that the user is not logged in.
+**Objective:** Verify that users cannot log in with invalid credentials.
 
-**Q2 – Register and Add Product to Cart**
+Test steps:
+1. Navigate to the login page.
+2. Enter an invalid email address and password.
+3. Submit the login form.
+4. Verify that the appropriate error message is displayed.
+5. Verify that the user is not logged in.
 
-- Register a new customer.
-- Log in with the registered account.
-- Navigate to a product category.
-- Select a product.
-- Add the product to the shopping cart.
-- Verify the correct product and quantity in the cart.
+#### Q2 – Register and Add Product to Cart
 
-**Q3 – Product Search and Complete Checkout (End-to-End)**
+**Objective:** Verify the customer registration and shopping cart workflow.
 
-- Search for Health Book.
-- Verify that the correct product appears in search results.
-- Open the product.
-- Increase the quantity to two.
-- Add the product to the shopping cart.
-- Accept the terms and conditions.
-- Proceed to checkout as a guest.
-- Complete the billing and shipping information.
-- Select a shipping method and payment method.
-- Confirm the order.
-- Verify the successful order confirmation and order details.
+Test steps:
+1. Register a new customer account.
+2. Log in using the registered account.
+3. Navigate to a product category.
+4. Select a product.
+5. Add the product to the shopping cart.
+6. Verify that the correct product and quantity appear in the cart.
+
+#### Q3 – Product Search and Complete Checkout
+
+**Objective:** Verify the complete product search and checkout workflow.
+
+Test steps:
+1. Search for the product **Health Book**.
+2. Verify that the correct product appears in the search results.
+3. Open the product details page.
+4. Increase the product quantity to two.
+5. Add the product to the shopping cart.
+6. Accept the terms and conditions.
+7. Proceed to checkout as a guest.
+8. Complete the billing and shipping information.
+9. Select a shipping method and payment method.
+10. Confirm the order.
+11. Verify the successful order confirmation and order details.
 
 ### UI Project Structure
 
 ```text
 pages/
-    CartPage.js
-    CheckoutPage.js
-    ProductPage.js
-    SearchPage.js
+├── CartPage.js
+├── CheckoutPage.js
+├── ProductPage.js
+└── SearchPage.js
 
 tests/
-    ui/
-        Q1-invalid-login.spec.js
-        Q2-register-cart.spec.js
-        Q3-search-checkout.spec.js
+└── ui/
+    ├── Q1-invalid-login.spec.js
+    ├── Q2-register-cart.spec.js
+    └── Q3-search-checkout.spec.js
 
 playwright.config.js
 ```
 
-### Run UI Tests Individually
+### Running UI Tests
 
-Run Q1:
-
-```bash
-npx playwright test tests/ui/Q1-invalid-login.spec.js
-```
-
-Run Q2:
-
-```bash
-npx playwright test tests/ui/Q2-register-cart.spec.js
-```
-
-Run Q3:
-
-```bash
-npx playwright test tests/ui/Q3-search-checkout.spec.js
-```
-
-### Run All UI Tests
-
-Run all three scenarios sequentially:
+Run all UI tests:
 
 ```bash
 npm test
@@ -126,11 +117,27 @@ Run tests in headed mode:
 npm run test:headed
 ```
 
+Run individual test scenarios:
+
+```bash
+npx playwright test tests/ui/Q1-invalid-login.spec.js
+```
+
+```bash
+npx playwright test tests/ui/Q2-register-cart.spec.js
+```
+
+```bash
+npx playwright test tests/ui/Q3-search-checkout.spec.js
+```
+
 ### UI Test Reports
 
-The project generates two types of UI reports:
+The project is configured to generate Playwright HTML and Allure reports.
 
 **1. Playwright HTML Report**
+
+Open the generated HTML report:
 
 ```bash
 npm run report:html
@@ -150,7 +157,7 @@ Generate the Allure report:
 npm run report:allure
 ```
 
-Open the generated report:
+Open the report:
 
 ```bash
 npm run report:allure:open
@@ -162,85 +169,129 @@ Report directory:
 allure-report/
 ```
 
-Screenshots are captured automatically for failed tests and attached to the test reports through the configured reporters.
+Screenshots are configured to be captured on test failure, and traces are retained on failure through the Playwright configuration.
 
 ---
 
-# Part C – API Automation
+# Part B – GitHub Workflow
 
-API automation is implemented using Postman and Newman against the JSONPlaceholder API.
+The project uses a feature-branch workflow to organize development and maintain a clear version-control history.
+
+### Branch Structure
+
+```text
+main
+│
+├── feature/Q1-invalid-login
+│
+├── feature/Q2-register-cart
+│
+├── feature/Q3-search-checkout
+│
+└── feature/part-c-api-testing
+```
+
+### Git Workflow
+
+The following workflow was followed:
+
+1. Created separate feature branches for assignment tasks.
+2. Developed and tested the automation scenarios.
+3. Committed changes using meaningful commit messages.
+4. Pushed feature branches to GitHub.
+5. Created pull requests for completed work.
+6. Merged completed changes into the main branch.
+7. Verified the final project in the main branch.
+
+### GitHub Repository
+
+**Repository:** [Demo Web Shop Automation & API Testing](https://github.com/adnan2248/demowebshop-automation-with-playwright-and-typicode-api-testing)
+
+The public repository contains the automation source code, API collection, project documentation, and generated test reports.
+
+---
+
+# Part C – API Test Automation
+
+API automation is implemented using Postman and Newman against the JSONPlaceholder REST API.
 
 **Base URL:**
 
+```text
 https://jsonplaceholder.typicode.com/users
+```
 
 ### API Test Scenarios
 
-**Request 1 – GET All Users**
+#### Request 1 – GET All Users
 
-Method: `GET`
+**Method:** `GET`
 
-Endpoint:
+**Endpoint:**
 
-```text
-https://jsonplaceholder.typicode.com/users
+```http
+GET https://jsonplaceholder.typicode.com/users
 ```
 
-Validations:
+**Validations:**
 
-- Verify response status code is 200.
-- Verify the response is a non-empty array.
-- Verify that the response contains user information.
-- Verify each user contains an ID, name, and email.
-- Select a user ID from the GET response and save it in a local variable.
+1. Verify that the response status code is `200`.
+2. Verify that the response body is a non-empty array.
+3. Verify that the response contains user information.
+4. Verify that every user contains:
+   - `id`
+   - `name`
+   - `email`
+5. Select a user ID from the GET response.
+6. Save the selected ID in a Postman local variable named `userId`.
 
-**Request 2 – Update User**
+#### Request 2 – Update User
 
-Method: `PUT`
+**Method:** `PUT`
 
-Endpoint:
+**Endpoint:**
 
-```text
-https://jsonplaceholder.typicode.com/users/{{userId}}
+```http
+PUT https://jsonplaceholder.typicode.com/users/{{userId}}
 ```
 
-The saved user ID is dynamically used in the endpoint.
+The user ID is dynamically retrieved from the variable saved during the GET request.
 
-The request updates:
+The PUT request updates the following fields:
 
 - Name
 - Email
 - Company name
 
-Validations:
+**Validations:**
 
-- Verify response status code is 200.
-- Verify the returned ID matches the saved user ID.
-- Verify the updated name matches the expected value.
-- Verify the phone number is not empty.
-- Verify the updated email.
-- Verify the updated company name.
+1. Verify that the response status code is `200`.
+2. Verify that the returned user ID matches the saved `userId`.
+3. Verify that the updated name matches the expected value.
+4. Verify that the phone number is not empty.
+5. Verify that the updated email matches the expected value.
+6. Verify that the updated company name matches the expected value.
 
-Dynamic test data is generated for the updated user information.
+Dynamic test data is used for the updated user information.
 
 ### API Project Structure
 
 ```text
 api-tests/
-    api test automation.postman_collection.json
-    reports/
-        api-report.html
+├── api test automation.postman_collection.json
+└── reports/
+    └── api-report.html
 ```
 
-### Run API Tests
+### Running API Tests
 
-Execute the Postman collection using Newman:
+Execute the Postman collection through Newman:
 
 ```bash
 npm run test:api
 ```
 
-This command executes the collection from the command line and generates an HTML report using Newman HTML Extra.
+This command runs the collection from the command line and generates an HTML report using Newman HTML Extra.
 
 ### API HTML Report
 
@@ -250,13 +301,15 @@ Generated report location:
 api-tests/reports/api-report.html
 ```
 
-Open this file in a browser to view the API execution results, requests, response information, and assertions.
+Open the HTML file in a browser to review the API execution results, requests, response information, and assertions.
+
+**Note:** JSONPlaceholder is a mock REST API. PUT requests return simulated updated data; changes are not permanently stored on the server.
 
 ---
 
-# Run All UI and API Tests
+# Running All Tests
 
-The project supports sequential execution of all UI and API test scenarios.
+The project supports sequential execution of both UI and API automation suites.
 
 Run:
 
@@ -264,14 +317,14 @@ Run:
 npm run test:all
 ```
 
-Execution order:
+### Execution Order
 
 1. Q1 – Invalid Login
 2. Q2 – Register and Add Product to Cart
-3. Q3 – Search Product and Complete Checkout
+3. Q3 – Product Search and Complete Checkout
 4. Part C – GET All Users and PUT Update User
 
-The Playwright suite runs first, followed by the Newman API collection.
+The Playwright UI tests execute first, followed by the Newman API collection.
 
 Both UI and API reports are generated during execution.
 
@@ -281,24 +334,23 @@ Both UI and API reports are generated during execution.
 
 ### Prerequisites
 
-Make sure the following tools are installed:
+Install the following tools before running the project:
 
-- Node.js
-- npm
-- Git
-- Postman (for viewing or editing the API collection)
-- A Chromium-compatible browser installed through Playwright
+- [Node.js](https://nodejs.org/)
+- npm (included with Node.js)
+- [Git](https://git-scm.com/)
+- [Postman](https://www.postman.com/) (optional, for viewing or editing the API collection)
 
 ### Step 1 – Clone the Repository
 
 ```bash
-git clone https://github.com/adnan2248/demowebshop-automation-with-playwright.git
+git clone https://github.com/adnan2248/demowebshop-automation-with-playwright-and-typicode-api-testing.git
 ```
 
-### Step 2 – Navigate to the Project
+### Step 2 – Navigate to the Project Directory
 
 ```bash
-cd demowebshop-automation-with-playwright
+cd demowebshop-automation-with-playwright-and-typicode-api-testing
 ```
 
 ### Step 3 – Install Dependencies
@@ -307,15 +359,13 @@ cd demowebshop-automation-with-playwright
 npm install
 ```
 
-### Step 4 – Install Playwright Browser
+### Step 4 – Install Playwright Chromium
 
 ```bash
 npx playwright install chromium
 ```
 
-### Step 5 – Execute the Tests
-
-Run all UI and API tests:
+### Step 5 – Run the Complete Test Suite
 
 ```bash
 npm run test:all
@@ -339,24 +389,29 @@ npm run test:all
 
 # Test Execution Results
 
-The project was successfully executed with the following results during development:
+The following results were recorded during project execution.
 
-### UI Automation
+### UI Automation Results
 
-- Q1 – Invalid Login: PASSED
-- Q2 – Register and Add Product to Cart: PASSED
-- Q3 – Search Product and Complete Checkout: PASSED
+| Test Scenario | Status |
+|---|---|
+| Q1 – Invalid Login | PASSED |
+| Q2 – Register and Add Product to Cart | PASSED |
+| Q3 – Product Search and Complete Checkout | PASSED |
 
 **Total: 3 UI tests passed.**
 
-### API Automation
+### API Automation Results
 
-- GET All Users: PASSED
-- PUT Update User: PASSED
+| API Request | Status |
+|---|---|
+| GET All Users | PASSED |
+| PUT Update User | PASSED |
 
-**Total: 2 API requests executed successfully.**
-
-**API assertions: 9 passed, 0 failed.**
+**Total:**
+- API requests executed: 2
+- Assertions passed: 9
+- Assertions failed: 0
 
 ### Combined Execution
 
@@ -368,48 +423,7 @@ npm run test:all
 
 All three UI scenarios and both API requests completed successfully during the recorded test run.
 
-*Note: These are recorded development results. Test results may vary on subsequent executions.*
-
----
-
-# Part B – GitHub Workflow
-
-The project follows a feature-branch workflow.
-
-Each question is maintained in a separate branch and merged into the main branch after completion.
-
-### Branch Structure
-
-```text
-main
-│
-├── feature/Q1-invalid-login
-│
-├── feature/Q2-register-cart
-│
-├── feature/Q3-search-checkout
-│
-└── feature/part-c-api-testing
-```
-
-### GitHub Repository
-
-**Repository:** 
-
-https://github.com/adnan2248/demowebshop-automation-with-playwright
-
-The repository is public and contains the automation source code, API collection, documentation, and generated HTML reports.
-
-### Git Workflow
-
-The following Git workflow was used:
-
-1. Create a separate feature branch for each assignment question.
-2. Develop and test the automation scenarios.
-3. Commit changes with meaningful commit messages.
-4. Push feature branches to GitHub.
-5. Create pull requests to merge completed work into `main`.
-6. Verify the merged changes in the main branch.
+*Note: These are recorded development results. Results may vary during subsequent executions depending on the application and test environment.*
 
 ---
 
@@ -417,12 +431,10 @@ The following Git workflow was used:
 
 **Adnan Hossain**
 
-GitHub: https://github.com/adnan2248
+GitHub Profile: [adnan2248](https://github.com/adnan2248)
 
-Project Repository:
-
-https://github.com/adnan2248/demowebshop-automation-with-playwright
+Project Repository: [Demo Web Shop Automation & API Testing](https://github.com/adnan2248/demowebshop-automation-with-playwright-and-typicode-api-testing)
 
 ---
 
-**Project Status:** UI Automation, API Automation, GitHub Workflow, and Documentation completed.
+**Project Status:** UI Automation, API Automation, GitHub Workflow, and Project Documentation completed.
