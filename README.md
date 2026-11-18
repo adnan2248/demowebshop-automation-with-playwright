@@ -415,7 +415,7 @@ The following Git workflow was used:
 
 # Author
 
-**Adnan Hossain Ratul**
+**Adnan Hossain**
 
 GitHub: https://github.com/adnan2248
 
