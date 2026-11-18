@@ -3,18 +3,24 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+
 "scripts": {
   "test": "npx playwright test",
   "test:headed": "npx playwright test --headed",
   "report:html": "npx playwright show-report",
   "report:allure": "npx allure generate allure-results --clean",
-  "report:allure:open": "npx allure open"
-},
+  "report:allure:open": "npx allure open",
+  "test:api": "newman run \"api-tests/api test automation.postman_collection.json\" -r cli,htmlextra --reporter-htmlextra-export \"api-tests/reports/api-report.html\"",
+  "test:all": "npm run test && npm run test:api && npm run report:allure"
+}
+,
   "keywords": [],
   "type": "module",
   "devDependencies": {
     "@playwright/test": "^1.65.1",
     "allure": "^3.33.0",
-    "allure-playwright": "^3.15.0"
+    "allure-playwright": "^3.15.0",
+    "newman": "^6.2.3",
+    "newman-reporter-htmlextra": "^1.23.1"
   }
 }

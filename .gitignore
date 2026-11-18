@@ -1,4 +1,16 @@
+# Dependencies
 node_modules/
+
+# Playwright temporary files
 test-results/
+playwright-report/
+
+# Allure raw results
 allure-results/
+
+# Environment variables
 .env
+.env.*
+
+# Keep generated Allure HTML report in Git
+!allure-report/
