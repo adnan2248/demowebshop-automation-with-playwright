@@ -6,13 +6,20 @@ export default defineConfig({
 
   fullyParallel: true,
 
-  reporter: 'list',
+ reporter: [
+  ['list'],
+  ['html', {
+    outputFolder: 'playwright-report',
+    open: 'never'
+  }],
+  ['allure-playwright']
+],
 
   use: {
     baseURL: 'https://demowebshop.tricentis.com/',
     browserName: 'chromium',
     headless: false,
-    screenshot: 'only-on-failure',
+    screenshot: 'on',
     trace: 'retain-on-failure'
   }
 });

@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "npx playwright test"
-  },
+"scripts": {
+  "test": "npx playwright test",
+  "test:headed": "npx playwright test --headed",
+  "report:html": "npx playwright show-report",
+  "report:allure": "npx allure generate allure-results --clean",
+  "report:allure:open": "npx allure open"
+},
   "keywords": [],
   "type": "module",
   "devDependencies": {
-    "@playwright/test": "^1.65.1"
+    "@playwright/test": "^1.65.1",
+    "allure": "^3.33.0",
+    "allure-playwright": "^3.15.0"
   }
 }
