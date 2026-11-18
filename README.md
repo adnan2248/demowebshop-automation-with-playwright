@@ -88,20 +88,56 @@ Test steps:
 ### UI Project Structure
 
 ```text
-pages/
-├── CartPage.js
-├── CheckoutPage.js
-├── ProductPage.js
-└── SearchPage.js
-
-tests/
-└── ui/
-    ├── Q1-invalid-login.spec.js
-    ├── Q2-register-cart.spec.js
-    └── Q3-search-checkout.spec.js
-
-playwright.config.js
+demowebshop-automation-with-playwright-and-typicode-api-testing/
+│
+├── pages/
+│   ├── CartPage.js
+│   ├── CheckoutPage.js
+│   ├── LoginPage.js
+│   ├── ProductPage.js
+│   ├── RegisterPage.js
+│   └── SearchPage.js
+│
+├── tests/
+│   └── ui/
+│       ├── Q1-invalid-login.spec.js
+│       ├── Q2-register-cart.spec.js
+│       └── Q3-search-checkout.spec.js
+│
+├── api-tests/
+│   ├── api test automation.postman_collection.json
+│   └── reports/
+│       └── api-report.html
+│
+├── allure-report/
+│   └── index.html
+│
+├── playwright-report/
+│   └── index.html
+│
+├── test-results/
+│
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── playwright.config.js
+└── README.md
 ```
+
+### Page Object Model (POM) Description
+
+| Page class | Responsibility |
+|---|---|
+| `CartPage.js` | Shopping cart interactions and verification |
+| `CheckoutPage.js` | Checkout process and order confirmation |
+| `LoginPage.js` | Customer login and invalid login validation |
+| `ProductPage.js` | Product details, quantity and add-to-cart operations |
+| `RegisterPage.js` | New customer registration |
+| `SearchPage.js` | Product search and search result verification |
+
+Each page class encapsulates its related page interactions and keeps the test scripts organized and maintainable.
+
+**Note:** `allure-report/`, `playwright-report/`, and `test-results/` are generated output directories. Their contents may change after every execution.
 
 ### Running UI Tests
 
